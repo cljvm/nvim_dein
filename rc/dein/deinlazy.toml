@@ -1,0 +1,154 @@
+# vim扩展
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+on_cmd = 'Denite'
+hook_source = 'source $DEIN_DIR/denite.vim'
+hook_add = '''
+  nnoremap <silent> <Leader>r
+        \ :<C-u>Denite -buffer-name=register
+        \ register neoyank<CR>
+  xnoremap <silent> <Leader>r
+        \ :<C-u>Denite -default-action=replace -buffer-name=register
+        \ register neoyank<CR>
+
+  nnoremap <silent> <Leader>/ :<C-u>Denite -buffer-name=search
+        \ line<CR>
+  nnoremap <silent> <Leader>* :<C-u>DeniteCursorWord -buffer-name=search
+        \ -mode=normal line<CR>
+  nnoremap <silent> [Window]s :<C-u>Denite file_point file_old
+        \ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
+
+  nnoremap <silent><expr> <Leader>tt  &filetype == 'help' ?  "g\<C-]>" :
+        \ ":\<C-u>DeniteCursorWord -buffer-name=tag -immediately
+        \  tag:include\<CR>"
+  nnoremap <silent><expr> <Leader>tp  &filetype == 'help' ?
+        \ ":\<C-u>pop\<CR>" : ":\<C-u>Denite -mode=normal jump\<CR>"
+
+  " nnoremap <silent> [dowWindow]n :<C-u>Denite dein<CR>
+  nnoremap <silent> <Leader>g :<C-u>Denite -buffer-name=search
+        \ -no-empty -mode=normal grep<CR>
+  nnoremap <silent> <Leader>\ :<C-u>Denite -buffer-name=search
+        \ -resume -mode=normal -refresh<CR>
+  nnoremap <silent> <Leader>ft :<C-u>Denite filetype<CR>
+  nnoremap <silent> <Leader>jp :<C-u>Denite -mode=normal change jump<CR>
+
+  " nnoremap <silent> [Space]gs :<C-u>Denite gitstatus<CR>
+  " nnoremap <silent> ;; :<C-u>Denite command command_history<CR>
+'''
+
+
+# 编辑
+[[plugins]]
+on_cmd = "Autoformat"
+repo = 'Chiel92/vim-autoformat'
+hook_add = '''
+    nnoremap <Leader>af :Autoformat<CR>
+'''
+
+# 其他
+[[plugins]]
+repo = 'Shougo/context_filetype.vim'
+
+
+# 自动补全
+[[plugins]]
+repo = 'honza/vim-snippets'
+
+[[plugins]]
+repo = 'SirVer/ultisnips'
+depends = ['vim-snippets', 'context_filetype.vim']
+on_event = 'InsertCharPre'
+hook_source = '''
+    let g:UltiSnipsExpandTrigger="<C-k>"
+    let g:UltiSnipsJumpForwardTrigger="<Tab>"
+    let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
+
+    " If you want :UltiSnipsEdit to split your window.
+    let g:UltiSnipsEditSplit="vertical"
+'''
+
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+depends = ['context_filetype.vim']
+on_event = 'InsertEnter'
+hook_source = '''
+    let g:deoplete#enable_at_startup = 1
+    source $DEIN_DIR/deoplete.vim
+'''
+
+[[plugins]]
+repo = 'zchee/deoplete-jedi'
+on_ft = 'python'
+
+[[plugins]]
+repo = 'carlitux/deoplete-ternjs' # 需要安装tern(nodejs)
+on_ft = 'javascript'
+
+
+
+# 工具栏
+[[plugins]]
+repo = 'majutsushi/tagbar'
+on_cmd = 'TagbarToggle'
+hook_add = '''
+    nnoremap <Leader>tg :TagbarToggle<CR>
+'''
+hook_source = '''
+    let g:tagbar_autofocus = 1
+'''
+
+[[plugins]]
+repo = 'sjl/gundo.vim'
+on_cmd = 'GundoToggle'
+
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+depends = ['vim-nerdtree-tabs', 'nerdtree-git-plugin']
+on_cmd = ['NERDTree', 'NERDTreeToggle', 'NERDTreeTabsToggle']
+hook_add = '''
+    nnoremap <Leader>fl :NERDTreeToggle<CR>
+'''
+hook_source = '''
+    let g:NERDTreeChDirMode=2
+    let g:NERDTreeShowBookmarks=1
+    let g:NERDTreeShowHidden=1
+    let g:NERDTreeShowLineNumbers=1
+    let g:NERDTreeDirArrowExpandable = '▸'
+    let g:NERDTreeDirArrowCollapsible = '▾'
+'''
+
+[[plugins]]
+repo = 'jistr/vim-nerdtree-tabs'
+
+[[plugins]]
+repo = 'Xuyuanp/nerdtree-git-plugin'
+
+
+# 语法高亮 
+[[plugins]]
+repo = 'pangloss/vim-javascript'
+on_ft = 'javascript'
+
+[[plugins]]
+repo = 'rust-lang/rust.vim'
+on_ft = 'rust'
+
+
+#查找、替换
+[[plugins]]
+repo = 'junegunn/fzf'
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+depends = ['fzf']
+on_cmd = ['FZF', 'Maps']
+
+
+# 编程环境
+[[plugins]]
+repo = 'klen/python-mode'
+on_ft = "python"
+
+[[plugins]]
+repo = 'metakirby5/codi.vim'
+on_ft = "python"

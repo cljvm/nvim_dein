@@ -1,0 +1,249 @@
+# 插件管理
+[[plugins]]
+repo = 'Shougo/dein.vim'
+#rtp = ''
+
+[[plugins]]
+repo = 'haya14busa/dein-command.vim'
+
+
+# 外观
+[[plugins]]
+repo = 'vim-airline/vim-airline'
+hook_add = '''
+    let g:airline_powerline_fonts = 1
+    let g:airline_theme = 'one'
+    let g:airline#extensions#tmuxline#enabled = 1
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#tab_min_count = 2
+    let g:airline#extensions#bufferline#overwrite_variables = 0
+    let g:airline#extensions#bufferline#enabled = 1
+    let g:airline#extensions#tabline#show_buffers = 0
+    let g:airline#extensions#tabline#fnamemod = ':t'
+    let g:airline#extensions#whitespace#enabled = 0
+    let g:airline_skip_empty_sections = 1
+    if !exists('g:airline_symbols')
+        let g:airline_symbols = {}
+    endif
+    let g:airline_symbols.linenr = ''
+    let g:airline_symbols.maxlinenr = ''
+    let g:airline_section_z = '%-0.3p%% %{g:airline_symbols.linenr}%-0.4l %-0.3v'
+'''
+
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
+
+[[plugins]]
+repo = 'rakr/vim-one'
+hook_add = '''
+    let g:one_allow_italics = 1
+'''
+
+# [[plugins]]
+# repo = 'arcticicestudio/nord-vim'
+# hook_post_source = '''
+#     colorscheme nord
+# '''
+
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+hook_add = '''
+    let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
+    let g:DevIconsEnableFoldersOpenClose = 1
+    let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+    let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
+'''
+
+#[[plugins]]
+#repo = 'tiagofumo/vim-nerdtree-syntax-highlight'
+#hook_add = '''
+#    " let g:NERDTreeDisableFileExtensionHighlight = 1
+#    " let g:NERDTreeDisableExactMatchHighlight = 1
+#    " let g:NERDTreeDisablePatternMatchHighlight = 1
+#    " let g:NERDTreeFileExtensionHighlightFullName = 1
+#    " let g:NERDTreeExactMatchHighlightFullName = 1
+#    " let g:NERDTreePatternMatchHighlightFullName = 1
+#    let g:NERDTreeHighlightFolders = 1
+#    let g:NERDTreeHighlightFoldersFullName = 1
+#'''
+
+
+# Tmux
+[[plugins]]
+repo = 'christoomey/vim-tmux-navigator'
+
+[[plugins]]
+repo = 'edkolev/tmuxline.vim'
+
+
+# Git
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+
+[[plugins]]
+repo = 'chemzqm/vim-easygit'
+
+[[plugins]]
+repo = 'mhinz/vim-signify'
+
+
+# 编辑
+[[plugins]]
+repo = 'terryma/vim-multiple-cursors'
+hook_add = '''
+    let g:multi_cursor_start_key='<C-n>'
+    let g:multi_cursor_start_word_key='g<C-n>'
+    augroup MultiCursorsGroup
+        autocmd!
+        autocmd User MultipleCursorsPre let g:deoplete#disable_auto_complete=1
+        autocmd User MultipleCursorsPost let g:deoplete#disable_auto_complete=0
+    augroup END
+'''
+
+[[plugins]]
+repo = 'justinmk/vim-sneak'
+
+[[plugins]]
+repo = 'tpope/vim-surround'
+
+[[plugins]]
+repo = 'tomtom/tcomment_vim'
+hook_add = '''
+    function! CommentAppendLine()
+        if (getline('.')=~'^\s*$')
+            exe 'TCommentBlock'
+        else
+            normal! $
+            normal! l
+            exe 'TCommentRight'
+        endif
+        startinsert!
+    endfunction
+    nnoremap <silent> <LocalLeader><Space> :call CommentAppendLine()<CR>
+'''
+  
+[[plugins]]
+repo = 'godlygeek/tabular'
+
+[[plugins]]
+repo = 'matze/vim-move'
+
+[[plugins]]
+repo = 'tpope/vim-speeddating'
+
+[[plugins]]
+repo = 'junegunn/rainbow_parentheses.vim'
+
+[[plugins]]
+repo = 'Raimondi/delimitMate'
+hook_add = '''
+    let delimitMate_expand_cr=1
+    let delimitMate_expand_space=1
+    let delimitMate_balance_matchpairs=1
+'''
+
+[[plugins]]
+repo = 'roxma/vim-paste-easy'
+
+[[plugins]]
+repo = 'haya14busa/vim-asterisk'
+hook_add = '''
+    let g:asterisk#keeppos = 1
+'''
+
+[[plugins]]
+repo = 'AdamWhittingham/vim-copy-filename'
+
+[[plugins]]
+repo = 'Shougo/neoyank.vim'
+
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+
+
+# 语言分析(Linting)
+[[plugins]]
+repo = 'w0rp/ale'
+depends = ['vim-airline']
+hook_add = '''
+    let g:ale_sign_column_always=1
+    " let g:ale_sign_error="▬"
+    " let g:ale_sign_warning="▬"
+    let g:ale_sign_error=""
+    let g:ale_sign_warning=""
+    let g:ale_statusline_format = ["E %d", "W %d", "ok"]
+    let g:ale_echo_msg_error_str = "E"
+    let g:ale_echo_msg_warning_str = "W"
+    let g:ale_echo_msg_format = "[%linter%] %s [%severity%]"
+    let g:ale_lint_on_text_changed = "never"
+    let g:ale_javascript_eslint_use_global = 0
+    nmap <silent> [w <Plug>(ale_previous)
+    nmap <silent> ]w <Plug>(ale_next)
+'''
+hook_post_source = '''
+    highlight ALEErrorSign guibg=NONE guifg=red
+    highlight ALEWarningSign guibg=NONE guifg=yellow
+'''
+
+# 语法高亮 
+[[plugins]]
+repo = 'sheerun/vim-polyglot' # 语法高亮包，支持大多数语言
+hook_add = '''
+    let g:polyglot_disabled = ['javascript', 'rust']
+'''
+
+
+# 查找、替换
+[[plugins]]
+repo = 'haya14busa/incsearch.vim'
+hook_add = '''
+    let g:incsearch#magic='\m'
+    let g:incsearch#auto_nohlsearch=1
+    map /  <Plug>(incsearch-forward)
+    map ?  <Plug>(incsearch-backward)
+    map g/ <Plug>(incsearch-stay)
+    map n  <Plug>(incsearch-nohl-n)
+    map N  <Plug>(incsearch-nohl-N)
+    map *  <Plug>(incsearch-nohl0)<Plug>(asterisk-z*)
+    map g* <Plug>(incsearch-nohl0)<Plug>(asterisk-gz*)
+    map #  <Plug>(incsearch-nohl0)<Plug>(asterisk-z#)
+    map g# <Plug>(incsearch-nohl0)<Plug>(asterisk-gz#)
+'''
+
+
+# Vim 扩展
+[[plugins]]
+repo = 'tpope/vim-repeat'
+
+[[plugins]]
+repo = 'tpope/vim-unimpaired'
+
+[[plugins]]
+repo = 'tpope/vim-abolish'
+
+[[plugins]]
+repo = 'roman/golden-ratio'
+
+
+# NeoVim Terminal 扩展
+[[plugins]]
+repo = 'vimlab/split-term.vim'
+
+[[plugins]]
+repo = 'wvffle/vimterm'
+
+
+# 工具栏
+[[plugins]]
+repo = 'bling/vim-bufferline'
+hook_add = '''
+    let g:bufferline_echo = 0
+'''
+
+
+# 会话管理
+[[plugins]]
+repo = 'tpope/vim-obsession'
