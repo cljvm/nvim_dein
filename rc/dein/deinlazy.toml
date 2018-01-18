@@ -84,6 +84,9 @@ on_ft = 'python'
 repo = 'carlitux/deoplete-ternjs' # 需要安装tern(nodejs)
 on_ft = 'javascript'
 
+[[plugins]]
+repo = 'racer-rust/vim-racer'
+on_ft = 'rust'
 
 
 # 工具栏
